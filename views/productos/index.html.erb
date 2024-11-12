@@ -1,0 +1,52 @@
+<h1>Productos</h1>
+
+
+
+<!-- Filtros -->
+<%= form_with url: productos_path, method: :get, local: true do %>
+  <div>
+  <%= label_tag :categoria_id, "Categoría" %>
+  <%= select_tag :categoria_id, options_from_collection_for_select(Categoria.all, :id, :nombre), include_blank: "Todas" %>
+</div>
+
+
+  <div>
+    <%= label_tag :tienda_id, "Tienda" %>
+    <%= select_tag :tienda_id, options_from_collection_for_select(Tienda.all, :id, :nombre), include_blank: "Todas" %>
+  </div>
+
+  <div>
+    <%= label_tag :oferta, "Solo Ofertas" %>
+    <%= check_box_tag :oferta, true %>
+  </div>
+
+  <div>
+    <%= label_tag :min_precio, "Precio mínimo" %>
+    <%= number_field_tag :min_precio %>
+  </div>
+
+  <div>
+    <%= label_tag :max_precio, "Precio máximo" %>
+    <%= number_field_tag :max_precio %>
+  </div>
+
+  <div>
+    <%= submit_tag "Filtrar" %>
+  </div>
+<% end %>
+
+<!-- Lista de Productos -->
+<% if @productos.any? %>
+  <% @productos.each do |producto| %>
+    <div>
+      <h2><%= producto.nombre %></h2>
+      <p><%= producto.descripcion %></p>
+      <p>Precio: S/ <%= producto.precio %></p>
+      <% if producto.oferta %>
+        <p>¡En oferta!</p>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>No hay productos disponibles.</p>
+<% end %>

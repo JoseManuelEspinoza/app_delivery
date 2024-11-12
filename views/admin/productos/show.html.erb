@@ -1,0 +1,8 @@
+<h1><%= @producto.nombre %></h1>
+<p><strong>Descripción:</strong> <%= @producto.descripcion %></p>
+<p><strong>Precio:</strong> <%= number_to_currency(@producto.precio) %></p>
+<p><strong>Categoría:</strong> <%= @producto.categoria.nombre %></p>
+<p><strong>En Oferta:</strong> <%= @producto.oferta ? 'Sí' : 'No' %></p>
+
+<%= link_to 'Editar', edit_admin_tienda_producto_path(@tienda, @producto) %>
+<%= link_to 'Volver a la lista', admin_tienda_productos_path(@tienda) %>

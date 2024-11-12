@@ -1,0 +1,33 @@
+<h1>Nuevo Producto para <%= @tienda.nombre %></h1>
+
+<%= form_with model: [@tienda, @producto], local: true do |f| %>
+  <div>
+    <%= f.label :nombre, "Nombre del Producto" %>
+    <%= f.text_field :nombre %>
+  </div>
+  <div>
+    <%= f.label :descripcion, "Descripción" %>
+    <%= f.text_area :descripcion %>
+  </div>
+  <div>
+    <%= f.label :precio, "Precio" %>
+    <%= f.number_field :precio, step: 0.01 %>
+  </div>
+  <div>
+    <%= f.label :cantidad, "Cantidad" %>
+    <%= f.number_field :cantidad %>
+  </div>
+  <div>
+    <%= f.label :categoria_id, "Categoría" %>
+    <%= f.collection_select :categoria_id, Categoria.all, :id, :nombre, include_blank: "Seleccionar Categoría" %>
+  </div>
+  <div>
+    <%= f.label :oferta, "En Oferta" %>
+    <%= f.check_box :oferta %>
+  </div>
+  <div>
+    <%= f.submit "Crear Producto" %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver', admin_tienda_productos_path(@tienda) %>

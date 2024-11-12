@@ -1,0 +1,32 @@
+<h1>Productos de <%= @tienda.nombre %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Categoría</th>
+      <th>Oferta</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @productos.each do |producto| %>
+      <tr>
+        <td><%= producto.nombre %></td>
+        <td><%= producto.descripcion %></td>
+        <td><%= number_to_currency(producto.precio) %></td>
+        <td><%= producto.categoria.nombre %></td>
+        <td><%= producto.oferta ? 'Sí' : 'No' %></td>
+        <td>
+          <%= link_to 'Mostrar', admin_tienda_producto_path(@tienda, producto) %>
+          <%= link_to 'Editar', edit_admin_tienda_producto_path(@tienda, producto) %>
+          <%= link_to 'Eliminar', admin_tienda_producto_path(@tienda, producto), method: :delete, data: { confirm: '¿Estás seguro?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Nuevo Producto', new_admin_tienda_producto_path(@tienda) %>
